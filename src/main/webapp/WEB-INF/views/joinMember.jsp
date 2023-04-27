@@ -10,11 +10,11 @@
 	<h1>회원가입</h1>
 	<hr>
 	<table border="1" cellspacing="0" cellpadding="0" width="600">
-		<form action="checkid">
+		<form action="checkId">
 		<tr height="40">
 			<th>아이디체크</th>
 			<td>
-				<input type="text" name="checkid" size="60">
+				<input type="text" name="mid" size="60">
 				<input type="submit" value="중복체크">
 			</td>
 		</tr>
