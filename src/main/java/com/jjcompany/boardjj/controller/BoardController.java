@@ -76,7 +76,7 @@ public class BoardController {
 		
 		if(checkIdPwFlag==1) { //로그인 성공
 			// HttpSession session = request.getSession();//컨트롤러에서 세션가져오기
-			session.setAttribute("session", mid);
+			session.setAttribute("sessionId", mid);
 			model.addAttribute("memberId", mid);
 		}
 		return "loginOk";
@@ -87,5 +87,11 @@ public class BoardController {
 		session.invalidate();	// 모든 데이터 삭제
 		
 		return "login";
+	}
+	@RequestMapping(value="/writeForm")
+	public String writeForm() {
+		
+		
+		return "writeForm";
 	}
 }
