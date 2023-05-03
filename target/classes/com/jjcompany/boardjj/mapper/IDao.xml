@@ -5,6 +5,8 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
     
 <mapper namespace="com.jjcompany.boardjj.dao.IDao">
+
+	<!-- 맴버관련 -->
 	<insert id="joinMemberDao">
 		INSERT INTO fbmember (mid, mpw, mname, memail) values (#{param1}, #{param2}, #{param3}, #{param4})
 	</insert>
@@ -14,6 +16,19 @@
 	<select id="checkIdPwDao" resultType="int">
 		SELECT COUNT(*) FROM fbmember WHERE mid=#{param1} and mpw=#{param2}
 	</select>
-
+	
+	<!-- 보드관련 -->
+	<select id="getMemberInfo" resultType="com.jjcompany.boardjj.dto.FbMemberDto">
+		SELECT * FROM fbmember WHERE mid=#{param1}
+	</select>
+	<insert id="writeDao">
+		INSERT INTO freeboard (fnum, fid, fname, ftitle, fcontent, fhit) values (FREEBOARD_SEQ.nextval, #{param1}, #{param2}, #{param3}, #{param4}, 0)
+	</insert>
+	<select id="listDao" resultType="com.jjcompany.boardjj.dto.FreeBoardDto">
+		SELECT * FROM freeboard ORDER BY fnum
+	</select>
+	<select id="totalBoardDao" resultType="int">
+		SELECT COUNT(*) FROM freeboard
+	</select>
 
 </mapper>

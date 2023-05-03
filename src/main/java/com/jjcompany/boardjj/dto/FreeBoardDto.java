@@ -8,9 +8,9 @@ public class FreeBoardDto {
 	private String fname;
 	private String ftitle;
 	private String fcontent;
-	private String hit;
+	private String fhit;
 	private Timestamp fdate;
-	public FreeBoardDto(int fnum, String fid, String fname, String ftitle, String fcontent, String hit,
+	public FreeBoardDto(int fnum, String fid, String fname, String ftitle, String fcontent, String fhit,
 			Timestamp fdate) {
 		super();
 		this.fnum = fnum;
@@ -18,7 +18,7 @@ public class FreeBoardDto {
 		this.fname = fname;
 		this.ftitle = ftitle;
 		this.fcontent = fcontent;
-		this.hit = hit;
+		this.fhit = fhit;
 		this.fdate = fdate;
 	}
 	public FreeBoardDto() {
@@ -55,11 +55,11 @@ public class FreeBoardDto {
 	public void setFcontent(String fcontent) {
 		this.fcontent = fcontent;
 	}
-	public String getHit() {
-		return hit;
+	public String getFhit() {
+		return fhit;
 	}
-	public void setHit(String hit) {
-		this.hit = hit;
+	public void setFhit(String fhit) {
+		this.fhit = fhit;
 	}
 	public Timestamp getFdate() {
 		return fdate;

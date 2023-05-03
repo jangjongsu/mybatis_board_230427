@@ -1,5 +1,7 @@
 package com.jjcompany.boardjj.controller;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -12,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.jjcompany.boardjj.dao.IDao;
+import com.jjcompany.boardjj.dto.FbMemberDto;
+import com.jjcompany.boardjj.dto.FreeBoardDto;
 
 @Controller
 public class BoardController {
@@ -31,14 +35,14 @@ public class BoardController {
 			
 		IDao dao = sqlsession.getMapper(IDao.class);
 		
-		int checkId = dao.checkId(request.getParameter("checkId"));
+		int checkId = dao.checkId(request.getParameter("mid"));
 		
 		if(checkId == 0) {
 			dao.joinMemberDao(request.getParameter("mid"), request.getParameter("mpw"), request.getParameter("mname"), request.getParameter("memail"));
 			model.addAttribute("memberName", request.getParameter("mname"));
-			model.addAttribute("checkIdFiag", "joinOk");
+			model.addAttribute("checkIdFlag", "joinOk");
 		} else {
-			model.addAttribute("checkIdFiag", "1");
+			model.addAttribute("checkIdFlag", "1");
 		}
 		
 		return "joinOk";
@@ -89,9 +93,50 @@ public class BoardController {
 		return "login";
 	}
 	@RequestMapping(value="/writeForm")
-	public String writeForm() {
+	public String writeForm(HttpSession session, Model model) {
 		
+		IDao dao = sqlsession.getMapper(IDao.class);
 		
-		return "writeForm";
+		String sid= (String)session.getAttribute("sessionId");
+		
+		FbMemberDto dto =dao.getMemberInfo(sid);
+		
+		if(sid == null) {
+			return "redirect:login";
+		}else {
+			model.addAttribute("memberDto", dto);
+			
+			return "writeForm";
+			
+		}
+		
+	}
+	@RequestMapping(value="/write")
+	public String write(HttpServletRequest request) {
+		
+		String fid = request.getParameter("mid");
+		String fname = request.getParameter("mname");
+		String ftitle = request.getParameter("ftitle");
+		String fcontent = request.getParameter("fcontent");
+		
+		IDao dao = sqlsession.getMapper(IDao.class);
+		
+		dao.writeDao(fid, fname, ftitle, fcontent);
+		
+		return "redirect:list";
+	}
+	@RequestMapping(value="/list")
+	public String list(Model model) {
+		
+		IDao dao = sqlsession.getMapper(IDao.class);
+		
+		int total = dao.totalBoardDao();
+		
+		ArrayList<FreeBoardDto> dtos = dao.listDao();
+		
+		model.addAttribute("list", dtos);
+		model.addAttribute("total", total);
+		
+		return "list";
 	}
 }

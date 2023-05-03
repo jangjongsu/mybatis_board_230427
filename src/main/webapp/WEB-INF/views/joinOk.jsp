@@ -30,6 +30,8 @@
 
 
 	${memberName } 님 가입 환영합니다.<br>
-	게시판에 열심히 글을 써주세요.
+	게시판에 열심히 글을 써주세요.<br>
+	<a href="writeForm">게시판 바로가기</a><br><br>
+	<a href="login">로그아웃</a>
 </body>
 </html>
