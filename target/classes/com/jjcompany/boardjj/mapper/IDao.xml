@@ -25,7 +25,7 @@
 		INSERT INTO freeboard (fnum, fid, fname, ftitle, fcontent, fhit) values (FREEBOARD_SEQ.nextval, #{param1}, #{param2}, #{param3}, #{param4}, 0)
 	</insert>
 	<select id="listDao" resultType="com.jjcompany.boardjj.dto.FreeBoardDto">
-		SELECT * FROM freeboard ORDER BY fnum
+		SELECT * FROM freeboard ORDER BY fnum DESC
 	</select>
 	<select id="totalBoardDao" resultType="int">
 		SELECT COUNT(*) FROM freeboard
