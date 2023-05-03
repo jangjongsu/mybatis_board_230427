@@ -19,6 +19,8 @@ public interface IDao {
 	public void writeDao(String mid, String mname, String ftitle, String fcontent);
 	public ArrayList<FreeBoardDto> listDao();
 	public int totalBoardDao(); 
+	public FreeBoardDto contentViewDao(String fnum);
+	public void deleteDao(String fnum);
 	
 	
 }
