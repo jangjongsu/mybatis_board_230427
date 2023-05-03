@@ -140,7 +140,7 @@ public class BoardController {
 		return "list";
 	}
 	@RequestMapping(value="/content_view")
-	public String content_view(Model model, HttpServletRequest request) {
+	public String content_view(Model model, HttpServletRequest request, HttpSession session) {
 		
 		String fnum = request.getParameter("fnum");
 		
@@ -149,6 +149,18 @@ public class BoardController {
 		FreeBoardDto dto = dao.contentViewDao(fnum);
 		
 		model.addAttribute("content", dto);
+		
+		
+		String sId = (String) session.getAttribute("sessionId");
+		
+		
+		if(sId == null) {//로그인하지 않은 경우
+			model.addAttribute("delCheck", "0");
+		} else if(sId.equals(dto.getFid())) { //로그인한 아이디와 글쓴아이디가 일치
+			model.addAttribute("delCheck", "1");
+		} else { //로그인한 아이디와 글쓴아이디가 일치하지 않은 경우
+			model.addAttribute("delCheck", "0");
+		}
 		
 		
 		return "contentView";
@@ -161,6 +173,8 @@ public class BoardController {
 		IDao dao = sqlsession.getMapper(IDao.class);
 		
 		dao.deleteDao(fnum);
+		
+		
 		
 		return "redirect:list";
 	}

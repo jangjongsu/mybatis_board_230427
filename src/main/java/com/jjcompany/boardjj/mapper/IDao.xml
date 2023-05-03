@@ -34,7 +34,7 @@
 		SELECT * FROM freeboard WHERE fnum = #{param1}
 	</select>
 	<insert id="deleteDao">
-		DELETE * FROM freeboard WHERE fnum = #{param1}
+		DELETE FROM freeboard WHERE fnum = #{param1}
 	</insert>
 	
 
