@@ -146,7 +146,11 @@ public class BoardController {
 		
 		IDao dao = sqlsession.getMapper(IDao.class);
 		
+		dao.upHitDao(fnum);
+		
 		FreeBoardDto dto = dao.contentViewDao(fnum);
+		
+		
 		
 		model.addAttribute("content", dto);
 		

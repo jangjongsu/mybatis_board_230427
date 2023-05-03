@@ -21,6 +21,7 @@ public interface IDao {
 	public int totalBoardDao(); 
 	public FreeBoardDto contentViewDao(String fnum);
 	public void deleteDao(String fnum);
+	public void upHitDao(String fnum);
 	
 	
 }
